@@ -3,21 +3,31 @@
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 import { Application } from "../declarations";
+import { Mongoose, ConnectionBase } from "mongoose";
+import { child } from "winston";
 
 export default function (app: Application) {
   const modelName = "users";
   const mongooseClient = app.get("mongooseClient");
+
+  const PreferenceSchema = new mongooseClient.Schema(
+  {
+    dateFormat: {type: String},
+    decimalSeperator: {type: String, default: "."},
+    thousandSeperator: {type: String, default: ","},
+    weekStart: {type: Number, default: 1}
+  });
+
   const schema = new mongooseClient.Schema(
     {
-      email: { type: String, unique: true, lowercase: true },
+      username: {type: String, unique: true, required: true },
+      email: { type: String, unique: true, lowercase: true , required: true},
       password: { type: String },
-
+      name: {type: String, required: true},
+      preferences: {type: PreferenceSchema, required: true},
       googleId: { type: String },
-
       facebookId: { type: String },
-
       twitterId: { type: String },
-
       githubId: { type: String },
     },
     {
