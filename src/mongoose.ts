@@ -8,6 +8,7 @@ export default function (app: Application) {
       useCreateIndex: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      w:"majority",
     })
     .catch((err) => {
       logger.error(err);

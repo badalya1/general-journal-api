@@ -1,8 +1,8 @@
-import path from "path";
-import favicon from "serve-favicon";
 import compress from "compression";
 import helmet from "helmet";
 import cors from "cors";
+
+import "dotenv/config";
 
 import feathers from "@feathersjs/feathers";
 import configuration from "@feathersjs/configuration";
