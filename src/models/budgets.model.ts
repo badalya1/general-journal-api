@@ -3,13 +3,33 @@
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 import { Application } from '../declarations';
+import { Schema } from 'mongoose';
+
+var ObjectId = Schema.Types.ObjectId;
 
 export default function (app: Application) {
   const modelName = 'budgets';
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
+
+  const filterSchema = new Schema({
+    transfers: {type: Boolean, required: true},
+    unclearedTransactions: {type: Boolean, required: true},
+    accounts: [ObjectId],
+    categories: [ObjectId],
+    tags: [ObjectId],
+
+  })
+
   const schema = new Schema({
-    text: { type: String, required: true }
+    userId: { type: ObjectId, required: true },
+    period: {type: String, required:true },
+    startDate: {type: Date, required: true},
+    endDate: {type: Date, required: true},
+    name: {type:String, required:true},
+    comment: {type:String},
+    includeFilters: {type: filterSchema, required: true},
+    excludeFilters: {type: filterSchema, required: true}
   }, {
     timestamps: true
   });

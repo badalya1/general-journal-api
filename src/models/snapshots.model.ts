@@ -3,13 +3,20 @@
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 import { Application } from '../declarations';
+import { Schema } from 'mongoose';
+
+var ObjectId = Schema.Types.ObjectId;
 
 export default function (app: Application) {
   const modelName = 'snapshots';
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const schema = new Schema({
-    text: { type: String, required: true }
+    accountId: { type: ObjectId, required: true },
+    userId: { type: ObjectId, required: true },
+    amount: {type: Number, required:true},
+    date: {type:Date, required: true},
+    transactionCount: {type: Number, required:true}
   }, {
     timestamps: true
   });
