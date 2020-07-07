@@ -9,7 +9,7 @@
   "authentication": {
     "entity": "user",
     "service": "users",
-    "secret": "N+rNukm6s/0csJNhE48rDiVU5BU=",
+    "secret": "JWT_SECRET",
     "authStrategies": [
       "jwt",
       "local"
@@ -24,7 +24,7 @@
       "expiresIn": "1d"
     },
     "local": {
-      "usernameField": "email",
+      "usernameField": "\\username",
       "passwordField": "password"
     },
     "oauth": {
@@ -52,5 +52,5 @@
       }
     }
   },
-  "mongodb": "mongodb://localhost:27017/general_journal_api"
+  "mongodb": "DB_URL"
 }
